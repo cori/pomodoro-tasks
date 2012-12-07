@@ -7,10 +7,11 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using System.Data.SQLite;
+using System.Diagnostics;
 
 namespace pomodoro_tasks
 {
-    public partial class AddActivity : Form
+    public partial class ActivityDialog : Form
     {
 
         private void AddActivity_Load(object sender, EventArgs e)
@@ -21,8 +22,8 @@ namespace pomodoro_tasks
         private void ReloadListBoxes()
         {
             Program.connection.Open();
-            SQLiteCommand getActivities = new SQLiteCommand("select activity_desc, estimated from activities where is_active_task = 0", Program.connection);
-            SQLiteCommand getTasks = new SQLiteCommand("select activity_desc, estimated from activities where is_active_task = 1", Program.connection);
+            SQLiteCommand getActivities = new SQLiteCommand("select id, activity_desc, estimated from activities where is_active_task = 0 and is_completed = 0", Program.connection);
+            SQLiteCommand getTasks = new SQLiteCommand("select id, activity_desc, estimated from activities where is_active_task = 1 and is_completed = 0", Program.connection);
             //var activitiesReader = getActivities.ExecuteReader();
             //var tasksReader = getTasks.ExecuteReader();
             //var activityVals = activitiesReader.GetValues();
@@ -46,7 +47,7 @@ namespace pomodoro_tasks
 
         }
 
-        public AddActivity()
+        public ActivityDialog()
         {
             InitializeComponent();
         }
@@ -118,7 +119,61 @@ namespace pomodoro_tasks
             e.Cancel = false;
             base.OnFormClosing(e);
         }
-    
+
+        private void btn_view_task_list_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            Program.taskDialog.Show();
+        }
+
+        private void btn_move_activity_to_tasks_Click(object sender, EventArgs e)
+        {
+            var items = list_activities.SelectedItems;
+            StringBuilder query = new StringBuilder();
+            foreach(var item in items) {
+                var row = (DataRowView)item;
+                Activity rowActivity = new Activity{
+                    Id = int.Parse(row[0].ToString()),
+                    Description = row[1].ToString(),
+                    EstimatedPomodoros = int.Parse(row[2].ToString()),
+                    IsActiveTask = true
+                };
+                query.AppendLine(rowActivity.MakeUpdateStatement());
+            }
+
+            SQLiteCommand update = new SQLiteCommand(query.ToString(), Program.connection);
+            Program.connection.Open();
+            update.ExecuteNonQuery();
+            Program.connection.Close();
+            ReloadListBoxes();
+        }
+
+        private void btn_move_task_to_activities_Click(object sender, EventArgs e)
+        {
+            var items = list_tasks.SelectedItems;
+            StringBuilder query = new StringBuilder();
+            foreach (var item in items) {
+                var row = (DataRowView)item;
+                Activity rowActivity = new Activity {
+                    Id = int.Parse(row[0].ToString()),
+                    Description = row[1].ToString(),
+                    EstimatedPomodoros = int.Parse(row[2].ToString()),
+                    IsActiveTask = false
+                };
+                query.AppendLine(rowActivity.MakeUpdateStatement());
+            }
+
+            SQLiteCommand update = new SQLiteCommand(query.ToString(), Program.connection);
+            Program.connection.Open();
+            update.ExecuteNonQuery();
+            Program.connection.Close();
+            ReloadListBoxes();
+        }
+
+        private void btn_exit_Click(object sender, EventArgs e)
+        {
+            Close();
+        }
     }
 
 }

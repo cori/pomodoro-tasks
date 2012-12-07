@@ -10,17 +10,22 @@ namespace pomodoro_tasks
     {
 
         public static SQLiteConnection connection;
+        public static ActivityDialog activityDialog;
+        public static TaskList taskDialog;
         /// <summary>
         /// The main entry point for the application.
         /// </summary>
         [STAThread]
         static void Main()
         {
-            FindOrCreateSqliteDb();
-
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new AddActivity());
+
+            FindOrCreateSqliteDb();
+            activityDialog = new ActivityDialog();
+            taskDialog = new TaskList();
+
+            Application.Run(activityDialog);
 
         }
 
@@ -40,7 +45,7 @@ namespace pomodoro_tasks
 
         private static void SetUpDatabase()
         {
-            SQLiteCommand cmd = new SQLiteCommand("create table activities ( id integer primary key autoincrement, activity_desc VARCHAR(256), estimated integer, actual integer, interruptions integer, is_active_task integer, is_completed integer)", connection);
+            SQLiteCommand cmd = new SQLiteCommand("create table activities ( id integer primary key autoincrement, activity_desc VARCHAR(256) unique, estimated integer, actual integer, interruptions integer, is_active_task integer, is_completed integer)", connection);
             cmd.ExecuteNonQuery();
         }
     }

@@ -1,6 +1,6 @@
 ﻿namespace pomodoro_tasks
 {
-    partial class AddActivity
+    partial class ActivityDialog
     {
         /// <summary>
         /// Required designer variable.
@@ -109,6 +109,7 @@
             this.btn_exit.TabIndex = 5;
             this.btn_exit.Text = "Exit";
             this.btn_exit.UseVisualStyleBackColor = true;
+            this.btn_exit.Click += new System.EventHandler(this.btn_exit_Click);
             // 
             // btn_view_task_list
             // 
@@ -119,12 +120,14 @@
             this.btn_view_task_list.TabIndex = 6;
             this.btn_view_task_list.Text = "View Tasks";
             this.btn_view_task_list.UseVisualStyleBackColor = true;
+            this.btn_view_task_list.Click += new System.EventHandler(this.btn_view_task_list_Click);
             // 
             // list_tasks
             // 
             this.list_tasks.FormattingEnabled = true;
             this.list_tasks.Location = new System.Drawing.Point(297, 97);
             this.list_tasks.Name = "list_tasks";
+            this.list_tasks.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
             this.list_tasks.Size = new System.Drawing.Size(231, 368);
             this.list_tasks.TabIndex = 7;
             // 
@@ -133,6 +136,7 @@
             this.list_activities.FormattingEnabled = true;
             this.list_activities.Location = new System.Drawing.Point(12, 96);
             this.list_activities.Name = "list_activities";
+            this.list_activities.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
             this.list_activities.Size = new System.Drawing.Size(231, 368);
             this.list_activities.TabIndex = 8;
             // 
@@ -145,6 +149,7 @@
             this.btn_move_activity_to_tasks.TabIndex = 9;
             this.btn_move_activity_to_tasks.Text = ">>";
             this.btn_move_activity_to_tasks.UseVisualStyleBackColor = true;
+            this.btn_move_activity_to_tasks.Click += new System.EventHandler(this.btn_move_activity_to_tasks_Click);
             // 
             // btn_move_task_to_activities
             // 
@@ -155,6 +160,7 @@
             this.btn_move_task_to_activities.TabIndex = 10;
             this.btn_move_task_to_activities.Text = "<<";
             this.btn_move_task_to_activities.UseVisualStyleBackColor = true;
+            this.btn_move_task_to_activities.Click += new System.EventHandler(this.btn_move_task_to_activities_Click);
             // 
             // groupBox1
             // 
@@ -170,7 +176,7 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Add an activity";
             // 
-            // AddActivity
+            // ActivityDialog
             // 
             this.AcceptButton = this.btn_add_activity;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -184,7 +190,7 @@
             this.Controls.Add(this.btn_view_task_list);
             this.Controls.Add(this.btn_exit);
             this.Controls.Add(this.groupBox1);
-            this.Name = "AddActivity";
+            this.Name = "ActivityDialog";
             this.Text = "Activities";
             this.Load += new System.EventHandler(this.AddActivity_Load);
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
