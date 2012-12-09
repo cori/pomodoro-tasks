@@ -48,5 +48,9 @@ namespace pomodoro_tasks
             SQLiteCommand cmd = new SQLiteCommand("create table activities ( id integer primary key autoincrement, activity_desc VARCHAR(256) unique, estimated integer, actual integer, interruptions integer, is_active_task integer, is_completed integer)", connection);
             cmd.ExecuteNonQuery();
         }
+
+        public static void CloseAll() {
+            Application.Exit();
+        }
     }
 }

@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using System.Data.SQLite;
+using System.Diagnostics;
 
 namespace pomodoro_tasks
 {
@@ -41,18 +42,20 @@ namespace pomodoro_tasks
 
         private void addTasksToListView(List<Activity> tasks)
         {
+            dg_tasks.Rows.Clear();
             tasks.ForEach(task => {
-                //dg_tasks.Rows.Add(new object[] { task.Description,
-                //    task.EstimatedPomodoros.ToString(),
-                //    task.ActualPomodoros.ToString(),
-                //    task.Interruptions.ToString(),
-                //    task.IsCompleted.ToString()}
-                //    );
-                var item = list_tasks.Items.Add(task.Description);
-                item.SubItems.Add(task.EstimatedPomodoros.ToString());
-                item.SubItems.Add(task.ActualPomodoros.ToString());
-                item.SubItems.Add(task.Interruptions.ToString());
-                item.SubItems.Add(task.IsCompleted.ToString());
+                dg_tasks.Rows.Add(new object[] { task.Id,
+                    task.Description,
+                    task.EstimatedPomodoros.ToString(),
+                    task.ActualPomodoros.ToString(),
+                    task.Interruptions.ToString(),
+                    task.IsCompleted.ToString()}
+                    );
+                //var item = list_tasks.Items.Add(task.Description);
+                //item.SubItems.Add(task.EstimatedPomodoros.ToString());
+                //item.SubItems.Add(task.ActualPomodoros.ToString());
+                //item.SubItems.Add(task.Interruptions.ToString());
+                //item.SubItems.Add(task.IsCompleted.ToString());
             });
 
         }
@@ -65,7 +68,21 @@ namespace pomodoro_tasks
 
         private void btn_exit_Click(object sender, EventArgs e)
         {
-            Close();
+            Program.activityDialog.Close();
+        }
+
+        private void dg_tasks_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            var row = ((DataGridView)sender).Rows[e.RowIndex];
+            var thisActivity = new Activity {
+                Id = int.Parse(row.Cells[0].Value.ToString()),
+                Description = row.Cells[1].Value.ToString(),
+                EstimatedPomodoros = int.Parse(row.Cells[2].Value.ToString()),
+                ActualPomodoros = int.Parse(row.Cells[3].Value.ToString()),
+                Interruptions = int.Parse(row.Cells[4].Value.ToString())
+            };
+
+                    Debug.Print(e.ColumnIndex.ToString());
         }
     }
 }

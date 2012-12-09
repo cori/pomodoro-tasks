@@ -34,5 +34,6 @@ namespace pomodoro_tasks
                 IsCompleted ? 1: 0,
                 Id);
         }
+
     }
 }
