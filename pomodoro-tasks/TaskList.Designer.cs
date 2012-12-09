@@ -30,19 +30,13 @@
             this.lbl_tasks = new System.Windows.Forms.Label();
             this.btn_exit = new System.Windows.Forms.Button();
             this.btn_activity_list = new System.Windows.Forms.Button();
-            this.list_tasks = new System.Windows.Forms.ListView();
-            this.Description = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.Estimated = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.Actual = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.Interruptions = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.Complete = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.dg_tasks = new System.Windows.Forms.DataGridView();
             this.Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.DescriptionCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.EstimatedCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ActualCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.InterruptionCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.CompleteCol = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.Description = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Estimated = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Actual = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Interruptions = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Completed = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dg_tasks)).BeginInit();
             this.SuspendLayout();
             // 
@@ -76,46 +70,6 @@
             this.btn_activity_list.UseVisualStyleBackColor = true;
             this.btn_activity_list.Click += new System.EventHandler(this.btn_activity_list_Click);
             // 
-            // list_tasks
-            // 
-            this.list_tasks.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.Description,
-            this.Estimated,
-            this.Actual,
-            this.Interruptions,
-            this.Complete});
-            this.list_tasks.Location = new System.Drawing.Point(12, 29);
-            this.list_tasks.Name = "list_tasks";
-            this.list_tasks.Size = new System.Drawing.Size(718, 259);
-            this.list_tasks.TabIndex = 4;
-            this.list_tasks.UseCompatibleStateImageBehavior = false;
-            this.list_tasks.View = System.Windows.Forms.View.Details;
-            // 
-            // Description
-            // 
-            this.Description.Text = "Description";
-            this.Description.Width = 359;
-            // 
-            // Estimated
-            // 
-            this.Estimated.Text = "Estimated";
-            this.Estimated.Width = 96;
-            // 
-            // Actual
-            // 
-            this.Actual.Text = "Actual";
-            this.Actual.Width = 82;
-            // 
-            // Interruptions
-            // 
-            this.Interruptions.Text = "Interruptions";
-            this.Interruptions.Width = 83;
-            // 
-            // Complete
-            // 
-            this.Complete.Text = "Complete";
-            this.Complete.Width = 93;
-            // 
             // dg_tasks
             // 
             this.dg_tasks.AllowUserToAddRows = false;
@@ -123,11 +77,11 @@
             this.dg_tasks.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dg_tasks.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Id,
-            this.DescriptionCol,
-            this.EstimatedCol,
-            this.ActualCol,
-            this.InterruptionCol,
-            this.CompleteCol});
+            this.Description,
+            this.Estimated,
+            this.Actual,
+            this.Interruptions,
+            this.Completed});
             this.dg_tasks.Location = new System.Drawing.Point(12, 29);
             this.dg_tasks.MultiSelect = false;
             this.dg_tasks.Name = "dg_tasks";
@@ -144,40 +98,40 @@
             this.Id.ReadOnly = true;
             this.Id.Width = 30;
             // 
-            // DescriptionCol
+            // Description
             // 
-            this.DescriptionCol.HeaderText = "Description";
-            this.DescriptionCol.Name = "DescriptionCol";
-            this.DescriptionCol.ReadOnly = true;
-            this.DescriptionCol.Width = 365;
+            this.Description.HeaderText = "Description";
+            this.Description.Name = "Description";
+            this.Description.ReadOnly = true;
+            this.Description.Width = 365;
             // 
-            // EstimatedCol
+            // Estimated
             // 
-            this.EstimatedCol.HeaderText = "Estimated";
-            this.EstimatedCol.Name = "EstimatedCol";
-            this.EstimatedCol.ReadOnly = true;
-            this.EstimatedCol.Width = 70;
+            this.Estimated.HeaderText = "Estimated";
+            this.Estimated.Name = "Estimated";
+            this.Estimated.ReadOnly = true;
+            this.Estimated.Width = 70;
             // 
-            // ActualCol
+            // Actual
             // 
-            this.ActualCol.HeaderText = "Actual";
-            this.ActualCol.Name = "ActualCol";
-            this.ActualCol.ReadOnly = true;
-            this.ActualCol.Width = 70;
+            this.Actual.HeaderText = "Actual";
+            this.Actual.Name = "Actual";
+            this.Actual.ReadOnly = true;
+            this.Actual.Width = 70;
             // 
-            // InterruptionCol
+            // Interruptions
             // 
-            this.InterruptionCol.HeaderText = "Interruptions";
-            this.InterruptionCol.Name = "InterruptionCol";
-            this.InterruptionCol.ReadOnly = true;
-            this.InterruptionCol.Width = 70;
+            this.Interruptions.HeaderText = "Interruptions";
+            this.Interruptions.Name = "Interruptions";
+            this.Interruptions.ReadOnly = true;
+            this.Interruptions.Width = 70;
             // 
-            // CompleteCol
+            // Completed
             // 
-            this.CompleteCol.HeaderText = "Complete";
-            this.CompleteCol.Name = "CompleteCol";
-            this.CompleteCol.ReadOnly = true;
-            this.CompleteCol.Width = 70;
+            this.Completed.HeaderText = "Complete";
+            this.Completed.Name = "Completed";
+            this.Completed.ReadOnly = true;
+            this.Completed.Width = 70;
             // 
             // TaskList
             // 
@@ -189,10 +143,8 @@
             this.Controls.Add(this.btn_exit);
             this.Controls.Add(this.lbl_tasks);
             this.Controls.Add(this.dg_tasks);
-            this.Controls.Add(this.list_tasks);
             this.Name = "TaskList";
             this.Text = "TaskList";
-            this.Activated += new System.EventHandler(this.TaskList_Activate);
             ((System.ComponentModel.ISupportInitialize)(this.dg_tasks)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -204,18 +156,12 @@
         private System.Windows.Forms.Label lbl_tasks;
         private System.Windows.Forms.Button btn_exit;
         private System.Windows.Forms.Button btn_activity_list;
-        private System.Windows.Forms.ListView list_tasks;
-        private System.Windows.Forms.ColumnHeader Description;
-        private System.Windows.Forms.ColumnHeader Estimated;
-        private System.Windows.Forms.ColumnHeader Actual;
-        private System.Windows.Forms.ColumnHeader Interruptions;
-        private System.Windows.Forms.ColumnHeader Complete;
         private System.Windows.Forms.DataGridView dg_tasks;
         private System.Windows.Forms.DataGridViewTextBoxColumn Id;
-        private System.Windows.Forms.DataGridViewTextBoxColumn DescriptionCol;
-        private System.Windows.Forms.DataGridViewTextBoxColumn EstimatedCol;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ActualCol;
-        private System.Windows.Forms.DataGridViewTextBoxColumn InterruptionCol;
-        private System.Windows.Forms.DataGridViewCheckBoxColumn CompleteCol;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Description;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Estimated;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Actual;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Interruptions;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn Completed;
     }
 }

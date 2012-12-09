@@ -19,16 +19,11 @@ namespace pomodoro_tasks
             ReloadListBoxes();
         }
 
-        private void ReloadListBoxes()
+        public void ReloadListBoxes()
         {
             Program.connection.Open();
             SQLiteCommand getActivities = new SQLiteCommand("select id, activity_desc, estimated from activities where is_active_task = 0 and is_completed = 0", Program.connection);
             SQLiteCommand getTasks = new SQLiteCommand("select id, activity_desc, estimated from activities where is_active_task = 1 and is_completed = 0", Program.connection);
-            //var activitiesReader = getActivities.ExecuteReader();
-            //var tasksReader = getTasks.ExecuteReader();
-            //var activityVals = activitiesReader.GetValues();
-            //var taskVals = tasksReader.GetValues();
-
 
             SQLiteDataAdapter activitiesAdapter = new SQLiteDataAdapter(getActivities);
             SQLiteDataAdapter tasksAdapter = new SQLiteDataAdapter(getTasks);
@@ -123,6 +118,7 @@ namespace pomodoro_tasks
         private void btn_view_task_list_Click(object sender, EventArgs e)
         {
             this.Hide();
+            Program.taskDialog.RefreshTaskList();
             Program.taskDialog.Show();
         }
 

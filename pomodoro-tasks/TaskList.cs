@@ -18,7 +18,12 @@ namespace pomodoro_tasks
             InitializeComponent();
         }
 
-        private void TaskList_Activate(object sender, EventArgs e)
+        //private void TaskList_Activate(object sender, EventArgs e)
+        //{
+        //    RefreshTaskList();
+        //}
+
+        public void RefreshTaskList()
         {
             List<Activity> tasks = new List<Activity>();
             SQLiteCommand cmd = new SQLiteCommand("select * from activities where is_active_task = 1 and is_completed = 0", Program.connection);
@@ -51,11 +56,6 @@ namespace pomodoro_tasks
                     task.Interruptions.ToString(),
                     task.IsCompleted.ToString()}
                     );
-                //var item = list_tasks.Items.Add(task.Description);
-                //item.SubItems.Add(task.EstimatedPomodoros.ToString());
-                //item.SubItems.Add(task.ActualPomodoros.ToString());
-                //item.SubItems.Add(task.Interruptions.ToString());
-                //item.SubItems.Add(task.IsCompleted.ToString());
             });
 
         }
@@ -63,6 +63,7 @@ namespace pomodoro_tasks
         private void btn_activity_list_Click(object sender, EventArgs e)
         {
             this.Hide();
+            Program.activityDialog.ReloadListBoxes();
             Program.activityDialog.Show();
         }
 
@@ -75,14 +76,34 @@ namespace pomodoro_tasks
         {
             var row = ((DataGridView)sender).Rows[e.RowIndex];
             var thisActivity = new Activity {
-                Id = int.Parse(row.Cells[0].Value.ToString()),
-                Description = row.Cells[1].Value.ToString(),
-                EstimatedPomodoros = int.Parse(row.Cells[2].Value.ToString()),
-                ActualPomodoros = int.Parse(row.Cells[3].Value.ToString()),
-                Interruptions = int.Parse(row.Cells[4].Value.ToString())
+                Id = int.Parse(row.Cells["Id"].Value.ToString()),
+                Description = row.Cells["Description"].Value.ToString(),
+                EstimatedPomodoros = int.Parse(row.Cells["Estimated"].Value.ToString()),
+                ActualPomodoros = int.Parse(row.Cells["Actual"].Value.ToString()),
+                Interruptions = int.Parse(row.Cells["Interruptions"].Value.ToString()),
+                IsActiveTask = true,
+                IsCompleted = false
             };
 
-                    Debug.Print(e.ColumnIndex.ToString());
+            switch (e.ColumnIndex) {
+                case 3:
+                    thisActivity.ActualPomodoros += 1;
+                    break;
+                case 4:
+                    thisActivity.Interruptions += 1;
+                    break;
+                case 5:
+                    thisActivity.IsCompleted = !thisActivity.IsCompleted;
+                    break;
+            }
+
+            SQLiteCommand updateCmd = new SQLiteCommand(thisActivity.MakeUpdateStatement(), Program.connection);
+            Program.connection.Open();
+            updateCmd.ExecuteNonQuery();
+            Program.connection.Close();
+
+            RefreshTaskList();
+
         }
     }
 }
