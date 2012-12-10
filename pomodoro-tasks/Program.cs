@@ -11,7 +11,6 @@ namespace pomodoro_tasks
 
         public static SQLiteConnection connection;
         public static ActivityDialog activityDialog;
-        public static TaskList taskDialog;
         /// <summary>
         /// The main entry point for the application.
         /// </summary>
@@ -23,7 +22,6 @@ namespace pomodoro_tasks
 
             FindOrCreateSqliteDb();
             activityDialog = new ActivityDialog();
-            taskDialog = new TaskList();
 
             Application.Run(activityDialog);
 
@@ -49,8 +47,5 @@ namespace pomodoro_tasks
             cmd.ExecuteNonQuery();
         }
 
-        public static void CloseAll() {
-            Application.Exit();
-        }
     }
 }
