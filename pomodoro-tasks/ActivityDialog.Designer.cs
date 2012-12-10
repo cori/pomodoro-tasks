@@ -77,6 +77,7 @@
             this.pnl_activities.Name = "pnl_activities";
             this.pnl_activities.Size = new System.Drawing.Size(701, 497);
             this.pnl_activities.TabIndex = 12;
+            this.pnl_activities.VisibleChanged += new System.EventHandler(this.AddActivity_Load);
             // 
             // groupBox1
             // 
@@ -117,6 +118,7 @@
             this.btn_add_activity.TabIndex = 2;
             this.btn_add_activity.Text = "Add Activity";
             this.btn_add_activity.UseVisualStyleBackColor = true;
+            this.btn_add_activity.Click += new System.EventHandler(this.btn_add_activity_Click);
             // 
             // lbl_actity_estimate
             // 
@@ -135,7 +137,7 @@
             this.txt_activity_estimate.Name = "txt_activity_estimate";
             this.txt_activity_estimate.PromptChar = '?';
             this.txt_activity_estimate.Size = new System.Drawing.Size(78, 20);
-            this.txt_activity_estimate.TabIndex = 2;
+            this.txt_activity_estimate.TabIndex = 1;
             // 
             // btn_move_task_to_activities
             // 
@@ -143,7 +145,7 @@
             this.btn_move_task_to_activities.Location = new System.Drawing.Point(330, 272);
             this.btn_move_task_to_activities.Name = "btn_move_task_to_activities";
             this.btn_move_task_to_activities.Size = new System.Drawing.Size(41, 23);
-            this.btn_move_task_to_activities.TabIndex = 16;
+            this.btn_move_task_to_activities.TabIndex = 6;
             this.btn_move_task_to_activities.Text = "<<";
             this.btn_move_task_to_activities.UseVisualStyleBackColor = true;
             this.btn_move_task_to_activities.Click += new System.EventHandler(this.btn_move_task_to_activities_Click);
@@ -154,7 +156,7 @@
             this.btn_move_activity_to_tasks.Location = new System.Drawing.Point(330, 226);
             this.btn_move_activity_to_tasks.Name = "btn_move_activity_to_tasks";
             this.btn_move_activity_to_tasks.Size = new System.Drawing.Size(41, 23);
-            this.btn_move_activity_to_tasks.TabIndex = 15;
+            this.btn_move_activity_to_tasks.TabIndex = 4;
             this.btn_move_activity_to_tasks.Text = ">>";
             this.btn_move_activity_to_tasks.UseVisualStyleBackColor = true;
             this.btn_move_activity_to_tasks.Click += new System.EventHandler(this.btn_move_activity_to_tasks_Click);
@@ -166,7 +168,7 @@
             this.list_activities.Name = "list_activities";
             this.list_activities.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
             this.list_activities.Size = new System.Drawing.Size(312, 368);
-            this.list_activities.TabIndex = 14;
+            this.list_activities.TabIndex = 3;
             // 
             // list_tasks
             // 
@@ -175,7 +177,7 @@
             this.list_tasks.Name = "list_tasks";
             this.list_tasks.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
             this.list_tasks.Size = new System.Drawing.Size(312, 368);
-            this.list_tasks.TabIndex = 13;
+            this.list_tasks.TabIndex = 5;
             // 
             // btn_view_task_list
             // 
@@ -183,7 +185,7 @@
             this.btn_view_task_list.Location = new System.Drawing.Point(517, 465);
             this.btn_view_task_list.Name = "btn_view_task_list";
             this.btn_view_task_list.Size = new System.Drawing.Size(85, 23);
-            this.btn_view_task_list.TabIndex = 12;
+            this.btn_view_task_list.TabIndex = 7;
             this.btn_view_task_list.Text = "View Tasks";
             this.btn_view_task_list.UseVisualStyleBackColor = true;
             this.btn_view_task_list.Click += new System.EventHandler(this.btn_view_task_list_Click);
@@ -195,7 +197,7 @@
             this.btn_exit.Location = new System.Drawing.Point(609, 465);
             this.btn_exit.Name = "btn_exit";
             this.btn_exit.Size = new System.Drawing.Size(85, 23);
-            this.btn_exit.TabIndex = 11;
+            this.btn_exit.TabIndex = 8;
             this.btn_exit.Text = "Exit";
             this.btn_exit.UseVisualStyleBackColor = true;
             this.btn_exit.Click += new System.EventHandler(this.btn_exit_Click);
@@ -317,6 +319,7 @@
             this.Name = "ActivityDialog";
             this.Text = "Activities";
             this.Load += new System.EventHandler(this.AddActivity_Load);
+            this.Paint += new System.Windows.Forms.PaintEventHandler(this.ActivityDialog_Paint);
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
             this.pnl_activities.ResumeLayout(false);
             this.groupBox1.ResumeLayout(false);

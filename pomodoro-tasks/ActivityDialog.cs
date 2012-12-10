@@ -244,6 +244,13 @@ namespace pomodoro_tasks
 
         }
 
+        private void ActivityDialog_Paint(object sender, PaintEventArgs e)
+        {
+            if (pnl_activities.Visible) {
+                txt_activity_description.Focus();
+            }
+        }
+
     }
 
 }
